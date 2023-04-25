@@ -1,0 +1,253 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Trangchu.master.cs" Inherits="Trangchu" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="menuchinh.css" />
+    <link rel="stylesheet" type="text/css" href="cssanh.css" />
+    <title>Untitled Page</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+    <div style="width: 1000px; margin: 0px auto; background-color: White;">
+              <%--  banner--%>
+            <div style=" background:url(image/banner.jpeg); height:196px;padding:1px;width:996px;border:2px solid #cacaca"></div>
+              <%--menutop--%>
+              <div style="clear: both; height: 30px">
+                  <div class="menutop" style="height:30px">
+                      <div style="float: left; width: 630px">
+                          <ul>
+                              <li><a href="Default.aspx">Trang chủ</a></li>
+                              <li><a href="ChitietAnh.aspx">Hình ảnh</a></li>
+                              <li><a href="GioiThieu.aspx">Giới thiệu</a></li>
+                              <%--<li><a href="#">Góp ý</a></li>--%>
+                              <%--
+                              <li><a href="Quydinhwebsite.aspx">Đăng kí</a></li>
+                              <li><a href="Dangnhap.aspx">Đăng nhập</a></li>
+                              
+                          </ul>--%>
+                      </div>
+                     
+                      <div style="float:right; line-height: 30px; padding-right: 10px; font-weight: bold">
+                       <span style="color:White"><asp:Literal ID="litchao" runat="server"></asp:Literal></span>
+                       <span style="color:Red"><asp:Literal ID="lituser" runat="server" ></asp:Literal></span>
+                       <span style="color:White"><asp:Label ID="lbvaitro" runat="server"  Style="position:relative"></asp:Label></span>
+                       <asp:LinkButton ID="lgthoat" runat="server" onclick="thoat" Visible="False" Style="position:relative">Thoát</asp:LinkButton>
+                      </div>
+                     
+                  </div>
+                  <div style="float: left">
+                  </div>
+                  <div>
+                  </div>
+              </div>
+            
+             <%-- menuleft--%>
+             <div style="clear: both">
+                <div style="clear: both; float: left; width: 180px;padding-left:5px;">
+                    <div class="menu-left">
+                    Thông tin
+                    </div>
+                    <div class="menuleft" style="border-left: 1px solid #d1d1d1; border-right: 1px solid #d1d1d1; width:190px; margin-top:3px">
+                       <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
+                           <HeaderTemplate>
+                                 <ul>
+                           </HeaderTemplate>
+                           <ItemTemplate>
+                                <li>
+                                   <a href="Thongtin.aspx?MaDMTT=<%#Eval("MaDMTT") %>"><%#Eval("TenDMTT")%></a>
+                                </li>
+                           </ItemTemplate>
+                           <FooterTemplate>
+                                  </ul>
+                           </FooterTemplate>
+                       </asp:Repeater>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                            ConnectionString="<%$ ConnectionStrings:HDConnectionString %>" 
+                            SelectCommand="SELECT * FROM [DMThongTin]">
+                       </asp:SqlDataSource>
+                    </div>
+                    <%--<div class="menu-left" style="margin-top:5px">
+                    Liên kết khác
+                    </div>
+                    <div class="menuleft" style="border-left: 1px solid #d1d1d1; border-right: 1px solid #d1d1d1;
+                    border-bottom: 1px solid #d1d1d1; width:190px; height:97px">
+                       <ul>
+                          <li>
+                             <a href="http://dantri.com.vn">Dân trí</a>
+                             <a href="http://hcm.24h.com.vn">24h.com.vn</a>
+                             <a href="http://mp3.zing.vn">mp3.zing.vn</a>
+                             <a href="http://www.google.com.vn/">google.com.vn</a>
+                          </li>
+                       </ul>
+                    </div>--%>
+                    <%--Thống kê số lượt truy cập--%>
+                     <div class="menu-left" style="margin-top:5px" >
+                    Số lượt truy cập
+                    </div>
+                    <div style="border-left: 1px solid #d1d1d1; border-right: 1px solid #d1d1d1; width:190px; margin-top:3px">
+                    <div><strong>Số lượt truy cập:</strong><strong><%=Application["count_visit"].ToString()%> </strong></div>
+                    <div>
+                    <strong>Số người online:</strong><%=Application["CurrentUsers"].ToString().Insert(0, "")%>
+                    </div>
+                    </div>
+                    <%--Liên kết khác--%>
+                    <div class="menu-left" >
+                    Liên kết khác
+                    </div>
+                    <div>
+                        <p style="margin-left: 5px;" height="60">
+                                <a href="http://haiduongdost.gov.vn" target="_blank">
+                                <img alt="" border="0" height="240" src="images/lienket/cup-thuong-hieu-2010-chuan-.gif" 
+                                    title="Báo Thanh Niên" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://haiduongdost.gov.vn/index.php?option=com_content&view=article&id=788:mo-hinh-cnh-hh-nong-nghip-nong-thon&catid=109:xhnv&Itemid=171" target="_blank">
+                                <img alt="" border="0" height="240" src="images/lienket/nongnghieps.gif" 
+                                    title="Báo Hà Nội mới" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baohaiduong.com.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bHaiDuong.jpg"
+                                    title="Báo Hải Dương" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.hagiang.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bHaGiang.jpg"
+                                    title="Báo Hà Giang" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://baoquangtri.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bQuangTri.jpg" 
+                                    title="Báo Quảng Trị" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baotuyenquang.com.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bTuyenQuang.jpg" 
+                                    title="Báo Tuyên Quang" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baohoabinh.com.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bHoaBinh.jpg" 
+                                    title="Báo Hòa Bình" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baodienbienphu.org.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bDienBienPhu.jpg" 
+                                    title="Báo Điện Biên Phủ" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://baolaocai.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bLaoCai.jpg" title="Báo Lào Cai" 
+                                    width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baobacgiang.com.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bBacGiang.jpg" 
+                                    title="Báo Bắc Giang" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baolangson.com.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bLangSon.jpg" 
+                                    title="Báo Lạng Sơn" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baothuathienhue.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bThuaThienHue.jpg" 
+                                    title="Báo Thừa Thiên Huế" width="190" /></a></p>
+                            <%--<p style="margin-left: 5px;">
+                                <a href="http://www.baobinhthuan.com.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bBinhThuan.jpg" 
+                                    title="Báo Bình Thuận" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://baothainguyen.org.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bThaiNguyen.jpg" 
+                                    title="Báo Thái Nguyên" width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baobackan.org.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bBacKan.jpg"title="Báo Bắc Kạn" 
+                                    width="190" /></a></p>
+                            <p style="margin-left: 5px;">
+                                <a href="http://www.baoquangninh.com.vn/" target="_blank">
+                                <img alt="" border="0" height="60" src="images/lienket/bQuangTri.jpg"title="Báo Quảng Ninh" 
+                                    width="190" /></a></p>--%>
+                            <%--<p style="margin-left: 5px;">
+                                &nbsp;</p>
+                            <p style="margin-left: 5px;">
+                                &nbsp;</p>
+                            <p style="margin-left: 5px;">
+                                &nbsp;</p>
+                            <p style="margin-left: 5px;">
+                                &nbsp;</p>
+                            <p style="margin-left: 5px;">
+                                &nbsp;</p>
+                            <p style="margin-left: 5px;">
+                                &nbsp;</p>
+                            <p style="margin-left: 5px;">
+                                &nbsp;</p>
+                            <p style="margin-left: 5px;">
+                                &nbsp;</p>
+                            <p style="margin-left: 5px;">
+                                &nbsp;</p>--%>
+                    </div>
+                </div>
+                
+             </div>
+              <div style="float: left; width: 625px">
+                  <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                  </asp:ContentPlaceHolder>
+             </div>
+             <%--menuright--%>
+             <div style="float: right;width:180px;margin-right:2px; background:#fff1b3">
+             <div>
+                    <%--Hỗ trợ trực tuyến--%>
+                  <div class="menu-right">Hỗ trợ trực tuyến</div>
+                  <div style="text-align:center">
+                   <div><span style="color:Black">nguyenthao_tk6</span>
+                  <a href="ymsgr:sendim?nguyenthao_tk6"><img style="border-width:0px;" alt="Yahoo hỗ trợ trực tuyến" src="http://opi.yahoo.com/online?u=nguyenthao_tk6&amp;m=g&amp;t=2&amp;l=us" /></a></div>
+                  
+                  <div><span style="color:Black">chomsaoxunu</span>
+                  <a href="ymsgr:sendim?chomsaoxunu_0000"><img style="border-width:0px;" alt="Yahoo hỗ trợ trực tuyến" src="http://opi.yahoo.com/online?u=chomsaoxunu_0000&amp;m=g&amp;t=2&amp;l=us" /></a></div>
+                  </div>
+                 
+                  
+                <%--  timf kiếm thông tin--%>
+                  <div class="menu-right" style="margin-top:5px">Tìm kiếm thông tin</div>
+                  <div style="text-align:center">
+                     <div style="margin-top:10px"><asp:TextBox ID="TextBox1" runat="server"></asp:TextBox></div>
+                     <div style="margin-top:5px"><asp:Button ID="Button1" runat="server" Text="Tìm kiếm"></asp:Button></div>
+                  </div>
+                  <div class="menu-right" style="margin-top:5px">Tin tức</div>
+                  <div style=" text-align:center;padding-left:2px;">
+                      <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource3">
+                         <ItemTemplate>
+                              <table border="0" cellpadding="0" cellspacing="0" style="width: 175px;padding-left:2px;">
+                                 <tr>
+                                    <td align="left" style="font-family:Arial">
+                                        <img alt="News" src="image/NEW01.GIF" />
+                                      <a href='chitiettin.aspx?MaTT=<%#Eval("MaTin") %>' class="HPLink" style="position:relative; color:Black; font-family:Arial"><%#Eval("SoLuoc")%></a>
+                                    </td>
+                                 </tr>
+                              </table>
+                         </ItemTemplate>
+                      </asp:DataList>
+                      <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
+                          ConnectionString="<%$ ConnectionStrings:HDConnectionString5 %>" 
+                          SelectCommand="SELECT TOP 2 * FROM [TinTuc]  ORDER BY NgayGui DESC"></asp:SqlDataSource>
+                  </div>
+                  <%--dongho--%>
+                  <div class="menu-right" style="margin-top:5px">Đồng hồ</div>
+                       <div style=" text-align:center;padding-left:2px;">
+                       <asp:Label ID="Label2" runat="server" Style="position: relative" Text="<embed src='images/Clock.swf' quality=high width=170px height=170px type='application/x-shockwave-flash'></embed>"></asp:Label>
+                       </div>
+                  <div class="menu-right" style="margin-top:5px">Quảng cáo</div>
+                  <div>
+                     <iframe src="images/quangcao/quangcao.htm" marginright="0" marginleft="0" margintop="0" width="192" frameborder="0" height="695" scrolling="no"></iframe>
+                  </div>
+              </div>
+              <div>
+               </div>
+             </div>
+            <div style="clear: both; width: 1000px; color:red; font-family: Verdana;line-height:60px;font-weight:bold;
+             height: 120px; background:-moz-linear-gradient(center top, #b8d8f2, #92bde0 25%, #3282c2 50%, #92bde0 75%, #b8d8f2);text-align:center">
+            CopyRight@ :  haiduong
+          <br />
+            Chi Tiết Liên Hệ:Nhóm adminTk6@gmail.co</div>
+    </div>
+    </form>
+</body>
+</html>
